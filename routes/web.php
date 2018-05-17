@@ -19,10 +19,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')
     ->name('home');
 
-Route::get('/admin', 'AdminController@admin')
+Route::get('/admin', function () {
+    return view('admin.admin');
+})
     ->middleware('is_admin')
     ->name('admin');
 
-Route::get('/admin/registration', 'RegisterController@valodator')
+Route::get('/admin/registration', function () {
+    return view('admin.new_user');
+})
     ->middleware('is_admin')
     ->name('admin_registration');

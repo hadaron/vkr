@@ -15,7 +15,7 @@ class CreateParntersTable extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('phone_number', 11)->unique();
+            $table->char('phone', 11)->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('name')->nullable();
