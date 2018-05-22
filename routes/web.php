@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')
     ->name('home');
 
@@ -30,3 +31,10 @@ Route::get('/admin/registration', function () {
 })
     ->middleware('is_admin')
     ->name('admin_registration');
+
+Route::post('/admin/registration', 'AuthController@create')
+    ->name('admin_registration');
+/*
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
+Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
+REST API*/
