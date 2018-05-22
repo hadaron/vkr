@@ -32,8 +32,8 @@ Route::get('/admin/registration', function () {
     ->middleware('is_admin')
     ->name('admin_registration');
 
-Route::post('/admin/registration', 'AuthController@create')
-    ->name('admin_registration');
+Route::post('/admin/registration', 'AdminController@user_registration')
+    ->name('admin_registration_user');
 /*
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');

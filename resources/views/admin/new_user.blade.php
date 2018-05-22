@@ -8,8 +8,8 @@
                     <div class="card-header">{{ __('Register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
+                        <form method="POST" action="{{ route('admin_registration_user') }}">
+                            {{ csrf_field() }}
 
                             <div class="form-group row">
                                 <label for="last_name"
