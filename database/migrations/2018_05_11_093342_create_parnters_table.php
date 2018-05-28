@@ -15,9 +15,9 @@ class CreateParntersTable extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('phone', 11)->unique();
-            $table->string('email')->unique();
-            $table->string('password');
+//            $table->char('phone', 11)->unique();
+//            $table->string('email')->unique();
+//            $table->string('password');
             $table->string('name')->nullable();
             $table->string('full_name')->nullable();
             $table->char('inn', 12)->nullable();
@@ -27,7 +27,11 @@ class CreateParntersTable extends Migration
             $table->string('bank_name')->nullable();
             $table->char('bik', 9)->nullable();
             $table->char('ks', 9)->nullable();
+            $table->bigInteger('user_id');
             $table->timestamps();
+        });
+        Schema::table('partners', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -39,5 +43,6 @@ class CreateParntersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('partners');
+
     }
 }

@@ -19,13 +19,25 @@ class User extends Authenticatable // implements JWTSubject
     const ADMIN_TYPE = 'admin';
     const DEFAULT_TYPE = 'default';
 
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+
+    }
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+
+    }
+
     public function isAdmin()
     {
         return $this->type === self::ADMIN_TYPE;
     }
 
     protected $fillable = [
-        'last_name', 'first_name', 'middle_name', 'phone', 'email', 'password',
+        'phone', 'email', 'password',
     ];
 
     /**
