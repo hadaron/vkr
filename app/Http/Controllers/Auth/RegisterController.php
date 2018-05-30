@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
+use App\Client;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -65,14 +67,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'last_name' => $data['last_name'],
-            'first_name' => $data['first_name'],
-            'middle_name' => $data['middle_name'],
+        $user = User::create([
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'type' => User::DEFAULT_TYPE,
+
         ]);
+
+        $user->client()->create([
+            'user_id' => $user['id'],
+            'last_name' => $data['last_name'],
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+        ]);
+        return $user;
     }
 }

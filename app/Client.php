@@ -18,7 +18,7 @@ class Client extends Model
 
     }
 
-    protected $fillable = ['last_name', 'first_name', 'middle_name',];
+    protected $fillable = ['last_name', 'first_name', 'middle_name', 'user_id',];
 
     /**
      * The attributes that should be hidden for arrays.
