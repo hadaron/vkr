@@ -26,14 +26,25 @@ Route::get('/admin', function () {
     ->middleware('is_admin')
     ->name('admin');
 
-Route::get('/admin/registration', function () {
-    return view('admin.new_user');
+
+Route::get('/admin/registration_client', function () {
+    return view('admin.client_register');
 })
     ->middleware('is_admin')
-    ->name('admin_registration');
+    ->name('admin_registration_client');
 
-Route::post('/admin/registration', 'AdminController@user_registration')
-    ->name('admin_registration_user');
+Route::get('/admin/registration_partner', function () {
+    return view('admin.partner_register');
+})
+    ->middleware('is_admin')
+    ->name('admin_registration_partner');
+
+Route::post('/admin/registration_client', 'AdminController@client_registration')
+    ->name('admin_registration_client');
+
+Route::post('/admin/registration_partner', 'AdminController@partner_registration')
+    ->name('admin_registration_partner');
+
 /*
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
