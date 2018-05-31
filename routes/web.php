@@ -39,11 +39,22 @@ Route::get('/admin/registration_partner', function () {
     ->middleware('is_admin')
     ->name('admin_registration_partner');
 
+
+Route::get('/admin/registration_shop', function () {
+    $partners = \App\Partner::all(['id', 'name']);
+    return View::make('admin.shop_register', compact('partners', $partners));
+})
+    ->middleware('is_admin')
+    ->name('admin_registration_shop');
+
 Route::post('/admin/registration_client', 'AdminController@client_registration')
     ->name('admin_registration_client');
 
 Route::post('/admin/registration_partner', 'AdminController@partner_registration')
     ->name('admin_registration_partner');
+
+Route::post('/admin/registration_shop', 'AdminController@shop_registration')
+    ->name('admin_registration_shop');
 
 /*
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');

@@ -15,4 +15,8 @@ class Partner extends Model
         return $this->hasOne(User::class);
     }
 
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
 }

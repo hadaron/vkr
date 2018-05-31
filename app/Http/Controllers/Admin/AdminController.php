@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Shop;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -75,6 +76,16 @@ class AdminController extends Controller
             'bank_name' => $request['bank_name'],
             'bik' => $request['bik'],
             'ks' => $request['ks'],
+        ]);
+        return redirect('/admin');
+    }
+
+    public function shop_registration(Request $request)
+    {
+        Shop::create([
+            'name' => $request['name'],
+            'address' => $request['address'],
+            'partner_id' => $request['partner'],
         ]);
         return redirect('/admin');
     }
