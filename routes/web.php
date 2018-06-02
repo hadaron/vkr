@@ -33,12 +33,17 @@ Route::get('/admin/registration_client', function () {
     ->middleware('is_admin')
     ->name('admin_registration_client');
 
+Route::post('/admin/registration_client', 'AdminController@client_registration')
+    ->name('admin_registration_client');
+
 Route::get('/admin/registration_partner', function () {
     return view('admin.partner_register');
 })
     ->middleware('is_admin')
     ->name('admin_registration_partner');
 
+Route::post('/admin/registration_partner', 'AdminController@partner_registration')
+    ->name('admin_registration_partner');
 
 Route::get('/admin/registration_shop', function () {
     $partners = \App\Partner::all(['id', 'name']);
@@ -47,14 +52,24 @@ Route::get('/admin/registration_shop', function () {
     ->middleware('is_admin')
     ->name('admin_registration_shop');
 
-Route::post('/admin/registration_client', 'AdminController@client_registration')
-    ->name('admin_registration_client');
-
-Route::post('/admin/registration_partner', 'AdminController@partner_registration')
-    ->name('admin_registration_partner');
-
 Route::post('/admin/registration_shop', 'AdminController@shop_registration')
     ->name('admin_registration_shop');
+
+Route::get('/admin/list_of_clients', function () {
+    $clients = DB::table('clients')->join('users', 'clients.user_id', '=', 'users.id')->get(array('email', 'phone', 'last_name', 'first_name', 'middle_name'));
+    return View::make('admin.list_of_clients', compact('clients', $clients));
+})
+    ->middleware('is_admin')
+    ->name('admin_list_of_clients');
+
+Route::get('/admin/list_of_partners', function () {
+//    $partners = \App\Partner::all(['name', 'full_name']);
+    $partners = DB::table('partners')->join('users', 'partners.user_id', '=', 'users.id')->get(array('email', 'phone', 'name', 'full_name'));
+
+    return View::make('admin.list_of_partners', compact('partners', $partners));
+})
+    ->middleware('is_admin')
+    ->name('admin_list_of_partners');
 
 /*
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
