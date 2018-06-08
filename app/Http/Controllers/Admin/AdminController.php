@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Shop;
 use App\User;
 use Illuminate\Http\Request;
@@ -87,6 +88,31 @@ class AdminController extends Controller
             'address' => $request['address'],
             'partner_id' => $request['partner'],
         ]);
+        return redirect('/admin');
+    }
+
+    public function employee_registration(Request $request)
+    {
+        $user = new User([
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'type' => User::DEFAULT_TYPE,
+        ]);
+        $user->save();
+        $user->employee()->create([
+            'user_id' => $user['id'],
+            'shop_id' => $request['shop'],
+            'last_name' => $request['last_name'],
+            'first_name' => $request['first_name'],
+            'middle_name' => $request['middle_name'],
+        ]);
+//        Employee::create([
+//            'last_name' => $request['last_name'],
+//            'first_name' => $request['first_name'],
+//            'middle_name' => $request['middle_name'],
+//            'shop_id' => $request['shop'],
+//        ]);
         return redirect('/admin');
     }
 }

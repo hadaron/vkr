@@ -10,6 +10,9 @@
                     <td>Фамилия</td>
                     <td>Имя</td>
                     <td>Отчество</td>
+                    <td>Номер карты</td>
+                    <td>Кэшбэк</td>
+                    <td>Сумма покупок</td>
                 </tr>
                 @foreach($clients as $client)
                     <tr>
@@ -18,6 +21,9 @@
                         <td>{{$client->last_name}}</td>
                         <td>{{$client->first_name}}</td>
                         <td>{{$client->middle_name}}</td>
+                        <td>{{$client->card_number}}</td>
+                        <td>{{$client->cashback}}</td>
+                        <td>{{$client->sum}}</td>
                     </tr>
                 @endforeach
             </table>

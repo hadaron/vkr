@@ -8,7 +8,7 @@ class Card extends Model
 {
     public function client()
     {
-        return $this->hasOne(Client::class);
+        return $this->belongsTo(Client::class);
     }
-
+    protected $fillable = ['client_id', 'card_number'];
 }

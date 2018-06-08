@@ -55,17 +55,34 @@ Route::get('/admin/registration_shop', function () {
 Route::post('/admin/registration_shop', 'AdminController@shop_registration')
     ->name('admin_registration_shop');
 
+Route::get('/admin/registration_employee', function () {
+    $shops = \App\Shop::all(['id','name']);
+    return View::make('admin.employee_register', compact('shops', $shops));
+})
+    ->middleware('is_admin')
+    ->name('admin_registration_employee');
+
+Route::post('/admin/registration_employee', 'AdminController@employee_registration')
+    ->name('admin_registration_employee');
+
+
+
+
+
 Route::get('/admin/list_of_clients', function () {
-    $clients = DB::table('clients')->join('users', 'clients.user_id', '=', 'users.id')->get(array('email', 'phone', 'last_name', 'first_name', 'middle_name'));
+    $clients = DB::table('clients')
+        ->join('users', 'clients.user_id', '=', 'users.id')
+        ->join('cards','clients.id','=','cards.client_id')
+        ->get(array('card_number','cashback','sum', 'email', 'phone', 'last_name', 'first_name', 'middle_name'));
     return View::make('admin.list_of_clients', compact('clients', $clients));
 })
     ->middleware('is_admin')
     ->name('admin_list_of_clients');
 
 Route::get('/admin/list_of_partners', function () {
-//    $partners = \App\Partner::all(['name', 'full_name']);
-    $partners = DB::table('partners')->join('users', 'partners.user_id', '=', 'users.id')->get(array('email', 'phone', 'name', 'full_name'));
-
+    $partners = DB::table('partners')
+        ->join('users', 'partners.user_id', '=', 'users.id')
+        ->get(array('email', 'phone', 'name', 'full_name'));
     return View::make('admin.list_of_partners', compact('partners', $partners));
 })
     ->middleware('is_admin')

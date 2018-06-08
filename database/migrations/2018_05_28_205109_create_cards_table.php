@@ -16,8 +16,9 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('client_id');
-            $table->decimal('cashback');
-            $table->decimal('sum');
+            $table->string('card_number');
+            $table->decimal('cashback')->default(0);
+            $table->decimal('sum')->default(0);
             $table->timestamps();
         });
 

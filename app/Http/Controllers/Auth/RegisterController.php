@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Card;
 use App\Client;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -74,13 +75,49 @@ class RegisterController extends Controller
             'type' => User::DEFAULT_TYPE,
 
         ]);
+        $client = new Client;
+        $client->user_id = $user['id'];
+        $client->last_name = $data['last_name'];
+        $client->first_name = $data['first_name'];
+        $client->middle_name = $data['middle_name'];
+//        $user->client()->create([
+//            'user_id' => $user['id'],
+//            'last_name' => $data['last_name'],
+//            'first_name' => $data['first_name'],
+//            'middle_name' => $data['middle_name'],
+//        ]);
+        $client->save();
+        $ccnumber = 7918;
+        $length = 16;
+        # generate digits
+        while (strlen($ccnumber) < ($length - 1)) {
+            $ccnumber .= rand(0, 9);
+        }
+        # Calculate sum
+        $sum = 0;
+        $pos = 0;
+        $reversedCCnumber = strrev($ccnumber);
+        while ($pos < $length - 1) {
+            $odd = $reversedCCnumber[$pos] * 2;
+            if ($odd > 9) {
+                $odd -= 9;
+            }
+            $sum += $odd;
+            if ($pos != ($length - 2)) {
 
-        $user->client()->create([
-            'user_id' => $user['id'],
-            'last_name' => $data['last_name'],
-            'first_name' => $data['first_name'],
-            'middle_name' => $data['middle_name'],
-        ]);
+                $sum += $reversedCCnumber[$pos + 1];
+            }
+            $pos += 2;
+        }
+        $checkdigit = ((floor($sum / 10) + 1) * 10 - $sum) % 10;
+        $ccnumber .= $checkdigit;
+//        $rel->number = $ccnumber;
+//        $rel->cvv = rand(100, 999);
+//        $rel->validity = date('Y n d', strtotime("+2 years"));
+        $card = new Card;
+        $card->card_number = $ccnumber;
+        $card->client_id = $client['id'];
+        $card->save();
         return $user;
     }
 }

@@ -31,6 +31,12 @@ class User extends Authenticatable // implements JWTSubject
 
     }
 
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+
+    }
+
     public function isAdmin()
     {
         return $this->type === self::ADMIN_TYPE;

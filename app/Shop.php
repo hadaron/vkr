@@ -9,8 +9,12 @@ class Shop extends Model
     protected $fillable = ['partner_id', 'address','name'];
     protected $hidden = [];
 
-    public function shop()
+    public function partner()
     {
-        return $this->hasOne(Partner::class);
+        return $this->belongsTo(Partner::class);
+    }
+    public function employee()
+    {
+        return $this->hasMany(Employee::class);
     }
 }

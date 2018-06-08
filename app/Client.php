@@ -9,7 +9,7 @@ class Client extends Model
 
     public function user(){return $this->hasOne(User::class);}
 
-    public function card(){return $this->belongsTo(Card::class);}
+    public function card(){return $this->hasOne(Card::class);}
 
     protected $fillable = ['last_name', 'first_name', 'middle_name', 'user_id',];
 

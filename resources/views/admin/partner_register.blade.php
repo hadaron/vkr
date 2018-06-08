@@ -166,7 +166,7 @@
 
                             <div class="form-group row">
                                 <label for="phone"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Номер телефона') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="phone" type="tel"
@@ -183,7 +183,7 @@
 
                             <div class="form-group row">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -200,7 +200,7 @@
 
                             <div class="form-group row">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Пароль') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -217,7 +217,7 @@
 
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Подтверждение пароля') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
