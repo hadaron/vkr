@@ -15,20 +15,14 @@ class User extends Authenticatable // implements JWTSubject
      *
      * @var array
      */
+    // 1,2,3 - are ids of role in roles table
+    const CLIENT_ROLE = 1;
+    const EMPLOYEE_ROLE = 2;
+    const ADMIN_ROLE = 3;
 
-    const ADMIN_TYPE = 'admin';
-    const DEFAULT_TYPE = 'default';
-
-    public function client()
+     public function client()
     {
         return $this->belongsTo(Client::class);
-
-    }
-
-    public function partner()
-    {
-        return $this->belongsTo(Partner::class);
-
     }
 
     public function employee()
@@ -39,11 +33,21 @@ class User extends Authenticatable // implements JWTSubject
 
     public function isAdmin()
     {
-        return $this->type === self::ADMIN_TYPE;
+        return $this->role_id === self::ADMIN_ROLE;
+    }
+
+    public function isClient()
+    {
+        return $this->role_id === self::CLIENT_ROLE;
+    }
+
+    public function isEmployee()
+    {
+        return $this->role_id === self::EMPLOYEE_ROLE;
     }
 
     protected $fillable = [
-        'phone', 'email', 'password',
+        'phone', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -54,22 +58,4 @@ class User extends Authenticatable // implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
-//    /**
-//     * Get the identifier that will be stored in the subject claim of the JWT.
-//     *
-//     * @return mixed
-//     */
-//    public function getJWTIdentifier()
-//    {
-//        return $this->getKey();
-//    }
-//    /**
-//     * Return a key value array, containing any custom claims to be added to the JWT.
-//     *
-//     * @return array
-//     */
-//    public function getJWTCustomClaims()
-//    {
-//        return [];
-//    }
 }

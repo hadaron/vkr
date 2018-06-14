@@ -7,13 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Partner extends Model
 {
 
-    protected $fillable = ['name', 'full_name', 'inn', 'kpp', 'ogrn', 'rc', 'bank_name', 'bik', 'ks','user_id',];
+    protected $fillable = ['name', 'full_name', 'inn', 'kpp', 'ogrn', 'rc', 'bank_name', 'bik', 'ks'];
     protected $hidden = [];
-
-    public function user()
-    {
-        return $this->hasOne(User::class);
-    }
 
     public function shop()
     {

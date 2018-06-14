@@ -3,13 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\View;
 
 class Client extends Model
 {
 
-    public function user(){return $this->hasOne(User::class);}
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 
-    public function card(){return $this->hasOne(Card::class);}
+    public function card()
+    {
+        return $this->hasOne(Card::class);
+    }
 
     protected $fillable = ['last_name', 'first_name', 'middle_name', 'user_id',];
 
@@ -19,6 +26,7 @@ class Client extends Model
      * @var array
      */
     protected $hidden = ['remember_token'];
+}
 //    /**
 //     * Get the identifier that will be stored in the subject claim of the JWT.
 //     *
@@ -37,5 +45,3 @@ class Client extends Model
 //    {
 //        return [];
 //    }
-}
-

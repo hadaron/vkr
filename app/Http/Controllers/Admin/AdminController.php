@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Card;
+use App\Client;
 use App\Employee;
+use App\Partner;
 use App\Shop;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('is_admin');
-    }
 
     public function admin()
     {
@@ -34,17 +34,19 @@ class AdminController extends Controller
             'phone' => $request['phone'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
-            'type' => User::DEFAULT_TYPE,
+            'role_id' => User::CLIENT_ROLE,
+
         ]);
-
-        $user->client()->create([
-            'user_id' => $user['id'],
-            'last_name' => $request['last_name'],
-            'first_name' => $request['first_name'],
-            'middle_name' => $request['middle_name'],
-        ]);
-
-
+        $client = new Client;
+        $client->user_id = $user['id'];
+        $client->last_name = $request['last_name'];
+        $client->first_name = $request['first_name'];
+        $client->middle_name = $request['middle_name'];
+        $client->save();
+        $card = new Card;
+        $card->card_number = (new \App\Card)->card_number();
+        $card->client_id = $client['id'];
+        $card->save();
         return redirect('/admin');
     }
 
@@ -58,16 +60,7 @@ class AdminController extends Controller
 //            'email' => 'required|string|email|max:255|unique:users',
 //            'password' => 'required|string|min:6',
 //        ]);
-
-        $user = new User([
-            'phone' => $request['phone'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-            'type' => User::DEFAULT_TYPE,
-        ]);
-        $user->save();
-        $user->partner()->create([
-            'user_id' => $user['id'],
+        Partner::create([
             'name' => $request['name'],
             'full_name' => $request['full_name'],
             'inn' => $request['inn'],
@@ -97,7 +90,7 @@ class AdminController extends Controller
             'phone' => $request['phone'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
-            'type' => User::DEFAULT_TYPE,
+            'role_id' => User::EMPLOYEE_ROLE,
         ]);
         $user->save();
         $user->employee()->create([
@@ -107,12 +100,20 @@ class AdminController extends Controller
             'first_name' => $request['first_name'],
             'middle_name' => $request['middle_name'],
         ]);
-//        Employee::create([
-//            'last_name' => $request['last_name'],
-//            'first_name' => $request['first_name'],
-//            'middle_name' => $request['middle_name'],
-//            'shop_id' => $request['shop'],
-//        ]);
         return redirect('/admin');
+    }
+    public function partners_list()
+    {
+        $partners = \DB::table('partners')
+            ->get(array('name', 'full_name', 'inn', 'kpp', 'ogrn', 'rc', 'bank_name', 'bik', 'ks'));
+        return View::make('admin.list_of_partners', compact('partners', $partners));
+    }
+    public function clients_list()
+    {
+        $clients = \DB::table('clients')
+            ->join('users', 'clients.user_id', '=', 'users.id')
+            ->join('cards', 'clients.id', '=', 'cards.client_id')
+            ->get(array('card_number', 'cashback', 'sum', 'email', 'phone', 'last_name', 'first_name', 'middle_name'));
+        return View::make('admin.list_of_clients', compact('clients', $clients));
     }
 }
