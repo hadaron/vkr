@@ -17,6 +17,7 @@ class CreatePartnersTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('full_name')->nullable();
+            $table->float('cashback_percent')->nullable();
             $table->string('inn', 12)->nullable();
             $table->char('kpp', 9)->nullable();
             $table->char('ogrn', 14)->nullable();

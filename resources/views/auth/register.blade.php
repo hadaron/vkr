@@ -14,7 +14,7 @@
 
                             <div class="form-group row">
                                 <label for="last_name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Фамилия') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -31,7 +31,7 @@
 
                             <div class="form-group row">
                                 <label for="first_name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Имя') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -47,25 +47,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="middle_name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Middle Name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text"
-                                           class="form-control{{ $errors->has('middle_name') ? ' is-invalid' : '' }}"
-                                           name="middle_name" value="{{ old('last_name') }}" required autofocus>
-
-                                    @if ($errors->has('middle_name'))
-                                        <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('middle_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="phone"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Номер телефона') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="tel"
@@ -82,7 +65,7 @@
 
                             <div class="form-group row">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -99,7 +82,7 @@
 
                             <div class="form-group row">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Пароль') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -116,7 +99,7 @@
 
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Повторите пароль') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"

@@ -6,6 +6,7 @@ use App\Card;
 use App\Client;
 use App\Employee;
 use App\Partner;
+use App\Percent;
 use App\Shop;
 use App\User;
 use Illuminate\Http\Request;
@@ -52,15 +53,7 @@ class AdminController extends Controller
 
     public function partner_registration(Request $request)
     {
-//        $this->validate($request, [
-//            'last_name' => 'required|string|max:255',
-//            'first_name' => 'required|string|max:255',
-//            'middle_name' => 'required|string|max:255',
-//            'phone' => 'required|string|max:11|unique:users',
-//            'email' => 'required|string|email|max:255|unique:users',
-//            'password' => 'required|string|min:6',
-//        ]);
-        Partner::create([
+        $partner = Partner::create([
             'name' => $request['name'],
             'full_name' => $request['full_name'],
             'inn' => $request['inn'],
@@ -70,6 +63,10 @@ class AdminController extends Controller
             'bank_name' => $request['bank_name'],
             'bik' => $request['bik'],
             'ks' => $request['ks'],
+        ]);
+        Percent::create([
+            'partner_id' => $partner['id'],
+            'percent' => $request['percent']
         ]);
         return redirect('/admin');
     }
@@ -102,18 +99,31 @@ class AdminController extends Controller
         ]);
         return redirect('/admin');
     }
+
     public function partners_list()
     {
         $partners = \DB::table('partners')
-            ->get(array('name', 'full_name', 'inn', 'kpp', 'ogrn', 'rc', 'bank_name', 'bik', 'ks'));
+            ->join('percents', 'partners.id', '=', 'percents.partner_id')
+            ->get(array('name', 'full_name', 'inn', 'kpp', 'ogrn', 'rc', 'bank_name', 'bik', 'ks', 'partners.id', 'percents.percent'));
         return View::make('admin.list_of_partners', compact('partners', $partners));
     }
+
     public function clients_list()
     {
         $clients = \DB::table('clients')
             ->join('users', 'clients.user_id', '=', 'users.id')
             ->join('cards', 'clients.id', '=', 'cards.client_id')
-            ->get(array('card_number', 'cashback', 'sum', 'email', 'phone', 'last_name', 'first_name', 'middle_name'));
+            ->get(array('card_number', 'cashback', 'sum', 'email', 'phone', 'last_name', 'first_name'));
         return View::make('admin.list_of_clients', compact('clients', $clients));
     }
+
+    public function change_value_percent(Request $request)
+    {
+            Percent::create([
+            'percent' => $request['percent'],
+            'partner_id' => $request['partner_id'],
+        ]);
+        return redirect('/admin');
+    }
+
 }

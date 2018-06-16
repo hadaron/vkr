@@ -27,7 +27,6 @@ class UsersTableSeeder extends Seeder
         DB::table('clients')->insert([
             'last_name' => 'Иванов',
             'first_name' => 'Иван',
-            'middle_name' => 'Иванович',
             'user_id' => '2',
         ]);
         DB::table('cards')->insert([

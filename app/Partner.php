@@ -14,4 +14,9 @@ class Partner extends Model
     {
         return $this->hasMany(Shop::class);
     }
+
+    public function percent()
+    {
+        return $this->hasMany(Percent::class);
+    }
 }

@@ -5,11 +5,10 @@
         <div class="form-group">
             <table class="form-control">
                 <tr>
-                    <td>id</td>
-                    <td>user_id</td>
+                    <td>Номер телефона</td>
+                    <td>Email</td>
                     <td>Фамилия</td>
                     <td>Имя</td>
-                    <td>Отчество</td>
                     <td>Номер карты</td>
                     <td>Кэшбэк</td>
                     <td>Сумма покупок</td>
@@ -20,7 +19,6 @@
                         <td>{{$client->email}}</td>
                         <td>{{$client->last_name}}</td>
                         <td>{{$client->first_name}}</td>
-                        <td>{{$client->middle_name}}</td>
                         <td>{{$client->card_number}}</td>
                         <td>{{$client->cashback}}</td>
                         <td>{{$client->sum}}</td>
