@@ -17,7 +17,7 @@ class CreatePercentsTable extends Migration
             $table->increments('id');
             $table->integer('partner_id');
             $table->float('percent');
-            $table->timestamps('3');
+            $table->timestamps();
         });
         Schema::table('percents', function ($table) {
             $table->foreign('partner_id')->references('id')->on('partners');

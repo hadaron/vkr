@@ -31,7 +31,7 @@
                                 <form method="POST" action="{{ route('admin_change_percent') }}">
                                     {{ csrf_field() }}
                                     <select class="form-control" name="percent">
-                                        <option value="{{$partner->percent}}" selected>{{$partner->percent*100}}%</option>
+                                        <option value="{{$partner->percent[count($partner->percent) - 1]->percent}}" selected>{{$partner->percent[count($partner->percent) - 1]->percent*100}}%</option>
                                         @for ($i = 1; $i <= 100; $i++)
                                             <option value="{{$i/100}}">{{$i}}%</option>
                                         @endfor

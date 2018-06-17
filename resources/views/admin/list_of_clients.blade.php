@@ -15,13 +15,13 @@
                 </tr>
                 @foreach($clients as $client)
                     <tr>
-                        <td>{{$client->phone}}</td>
-                        <td>{{$client->email}}</td>
+                        <td>{{$client->user['phone']}}</td>
+                        <td>{{$client->user['email']}}</td>
                         <td>{{$client->last_name}}</td>
                         <td>{{$client->first_name}}</td>
                         <td>{{$client->card_number}}</td>
-                        <td>{{$client->cashback}}</td>
-                        <td>{{$client->sum}}</td>
+                        <td>{{$client->cashback_history->sum('cashback')}}</td>
+                        <td>{{$client->cashback_history->sum('sum')}}</td>
                     </tr>
                 @endforeach
             </table>

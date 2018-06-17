@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Card;
+use App\Cashback_history;
 use App\Client;
 use App\Employee;
 use App\Partner;
@@ -25,29 +25,29 @@ class AdminController extends Controller
         $this->validate($request, [
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
             'phone' => 'required|string|max:11|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
-
         $user = User::create([
             'phone' => $request['phone'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'role_id' => User::CLIENT_ROLE,
-
         ]);
-        $client = new Client;
-        $client->user_id = $user['id'];
-        $client->last_name = $request['last_name'];
-        $client->first_name = $request['first_name'];
-        $client->middle_name = $request['middle_name'];
-        $client->save();
-        $card = new Card;
-        $card->card_number = (new \App\Card)->card_number();
-        $card->client_id = $client['id'];
-        $card->save();
+        Client::create([
+            'user_id' => $user['id'],
+            'last_name' => $request['last_name'],
+            'first_name' => $request['first_name'],
+            'card_number' => (new \App\Client)->card_number()
+        ]);
+        Cashback_history::create([
+            'user_id' => $user['id'],
+            'shop_id' => '1',
+            'percent_id' => '1',
+            'sum' => '0',
+            'cashback' => '0',
+        ]);
         return redirect('/admin');
     }
 
@@ -68,6 +68,7 @@ class AdminController extends Controller
             'partner_id' => $partner['id'],
             'percent' => $request['percent']
         ]);
+
         return redirect('/admin');
     }
 
@@ -102,24 +103,20 @@ class AdminController extends Controller
 
     public function partners_list()
     {
-        $partners = \DB::table('partners')
-            ->join('percents', 'partners.id', '=', 'percents.partner_id')
-            ->get(array('name', 'full_name', 'inn', 'kpp', 'ogrn', 'rc', 'bank_name', 'bik', 'ks', 'partners.id', 'percents.percent'));
+        $partners = Partner::with('percent')->get();
         return View::make('admin.list_of_partners', compact('partners', $partners));
     }
 
     public function clients_list()
     {
-        $clients = \DB::table('clients')
-            ->join('users', 'clients.user_id', '=', 'users.id')
-            ->join('cards', 'clients.id', '=', 'cards.client_id')
-            ->get(array('card_number', 'cashback', 'sum', 'email', 'phone', 'last_name', 'first_name'));
+        $clients = Client::with('cashback_history', 'user')->get();
         return View::make('admin.list_of_clients', compact('clients', $clients));
     }
 
-    public function change_value_percent(Request $request)
+    public
+    function change_value_percent(Request $request)
     {
-            Percent::create([
+        Percent::create([
             'percent' => $request['percent'],
             'partner_id' => $request['partner_id'],
         ]);

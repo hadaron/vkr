@@ -16,16 +16,15 @@ class CreateCashbackHistoriesTable extends Migration
         Schema::create('cashback_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('shop_id');
-            $table->integer('card_id');
-            $table->timestampTz('time');
+            $table->bigInteger('client_id');
+            $table->bigInteger('percent_id');
             $table->decimal('sum');
             $table->decimal('cashback');
-            $table->bigInteger('percent_id');
             $table->timestamps();
         });
 
         Schema::table('cashback_histories', function ($table) {
-            $table->foreign('card_id')->references('id')->on('cards');
+            $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('shop_id')->references('id')->on('shops');
         });
     }

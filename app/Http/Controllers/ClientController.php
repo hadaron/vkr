@@ -23,9 +23,9 @@ class ClientController extends Controller
         $auth = Auth::id();
         $clients = \DB::table('clients')
             ->join('users', 'clients.user_id', '=', 'users.id')
-            ->join('cards', 'clients.id', '=', 'cards.client_id')
+            ->join('cashback_histories','clients.id','=','cashback_histories.clients_id')
             ->where("clients.user_id", "=", "$auth")
-            ->get(array('card_number', 'cashback', 'sum', 'email', 'phone', 'last_name', 'first_name', 'middle_name'));
+            ->get(array('card_number', 'cashback', 'sum', 'email', 'phone', 'last_name', 'first_name'));
         return View::make('client_account', compact('clients', $clients));
     }
 

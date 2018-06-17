@@ -67,18 +67,26 @@ Route::group(['middleware' => 'is_admin'], function () {
     Route::get('/admin/list_of_partners', 'AdminController@partners_list')
         ->name('admin_list_of_partners');
 
-    Route::post('/admin/list_of_partners','AdminController@change_value_percent')
+    Route::post('/admin/list_of_partners', 'AdminController@change_value_percent')
         ->name('admin_change_percent');
 });
 
-Route::get('account/','ClientController@client_account');
-Route::get('c_account/', function (){
-    return view('employee_account');
-})->middleware('is_employee');
+Route::get('account/', 'ClientController@client_account');
+Route::group(['middleware' => 'is_employee'], function () {
 
-Route::post('c_account/','EmployeeController@client_search')
-->name('search_client')
-->middleware('is_employee');
+    Route::get('c_account/', function () {
+        return view('employee_account');
+    });
+    Route::get('c_account/transaction', function () {
+        return view('transaction_page');
+    });
+
+    Route::post('c_account/', 'EmployeeController@client_search')
+        ->name('search_client');
+
+    Route::post('c_account/transaction', 'EmployeeController@transaction')
+        ->name('transaction');
+});
 
 /*
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');

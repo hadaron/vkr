@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Card;
+use App\Cashback_history;
 use App\Client;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -53,7 +53,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
             'phone' => 'required|string|max:11|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -75,16 +74,19 @@ class RegisterController extends Controller
             'role_id' => User::CLIENT_ROLE,
 
         ]);
-        $client = new Client;
-        $client->user_id = $user['id'];
-        $client->last_name = $data['last_name'];
-        $client->first_name = $data['first_name'];
-        $client->middle_name = $data['middle_name'];
-        $client->save();
-        $card = new Card;
-        $card->card_number = (new \App\Card)->card_number();
-        $card->client_id = $client['id'];
-        $card->save();
+        Client::create([
+            'user_id'=> $user['id'],
+            'last_name'=> $data['last_name'],
+            'first_name' => $data['first_name'],
+            'card_number' => (new \App\Client)->card_number()
+            ]);
+        Cashback_history::create([
+            'user_id'=> $user['id'],
+            'shop_id'=> '1',
+            'percent_id'=> '1',
+            'sum'=> '0',
+            'cashback'=> '0',
+        ]);
         return $user;
     }
 }
