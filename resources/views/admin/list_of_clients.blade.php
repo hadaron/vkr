@@ -22,6 +22,13 @@
                         <td>{{$client->card_number}}</td>
                         <td>{{$client->cashback_history->sum('cashback')}}</td>
                         <td>{{$client->cashback_history->sum('sum')}}</td>
+                        <td>
+                            <form action="{{route('client_remove')}}" method="post">
+                                {{csrf_field()}}
+                                <input type="hidden" name="id" value="{{$client->id}}">
+                                <input type="submit" value="Удалить">
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </table>

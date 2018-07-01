@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/account';
 
     /**
      * Create a new controller instance.
@@ -53,9 +53,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:11|unique:users',
+            'phone' => 'required|string|max:12|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
     }
 
@@ -74,14 +74,14 @@ class RegisterController extends Controller
             'role_id' => User::CLIENT_ROLE,
 
         ]);
-        Client::create([
+        $client = Client::create([
             'user_id'=> $user['id'],
             'last_name'=> $data['last_name'],
             'first_name' => $data['first_name'],
             'card_number' => (new \App\Client)->card_number()
             ]);
         Cashback_history::create([
-            'user_id'=> $user['id'],
+            'client_id'=> $client['id'],
             'shop_id'=> '1',
             'percent_id'=> '1',
             'sum'=> '0',

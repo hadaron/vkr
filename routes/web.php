@@ -69,6 +69,10 @@ Route::group(['middleware' => 'is_admin'], function () {
 
     Route::post('/admin/list_of_partners', 'AdminController@change_value_percent')
         ->name('admin_change_percent');
+    Route::post('/admin/report','AdminController@report')
+        ->name('report');
+    Route::post('/admin/list_of_clients','AdminController@client_remove')
+        ->name('client_remove');
 });
 
 Route::get('account/', 'ClientController@client_account');
@@ -77,6 +81,7 @@ Route::group(['middleware' => 'is_employee'], function () {
     Route::get('c_account/', function () {
         return view('employee_account');
     });
+
     Route::get('c_account/transaction', function () {
         return view('transaction_page');
     });
@@ -87,8 +92,3 @@ Route::group(['middleware' => 'is_employee'], function () {
     Route::post('c_account/transaction', 'EmployeeController@transaction')
         ->name('transaction');
 });
-
-/*
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
-Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
-REST API*/

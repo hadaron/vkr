@@ -4,23 +4,18 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-//use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable // implements JWTSubject
+class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
     // 1,2,3 - are ids of role in roles table
     const CLIENT_ROLE = 1;
     const EMPLOYEE_ROLE = 2;
     const ADMIN_ROLE = 3;
 
-     public function client()
+    public function client()
     {
         return $this->hasOne(Client::class);
     }
@@ -46,6 +41,11 @@ class User extends Authenticatable // implements JWTSubject
         return $this->role_id === self::EMPLOYEE_ROLE;
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'phone', 'email', 'password', 'role_id'
     ];

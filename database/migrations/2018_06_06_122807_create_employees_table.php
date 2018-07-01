@@ -15,16 +15,16 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('shop_id');
+            $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('shop_id')->nullable();
             $table->string('last_name');
             $table->string('first_name');
             $table->string('middle_name');
             $table->timestamps();
         });
         Schema::table('employees', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('shop_id')->references('id')->on('shops');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('set null');
         });
     }
 

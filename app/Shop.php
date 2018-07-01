@@ -17,4 +17,8 @@ class Shop extends Model
     {
         return $this->hasMany(Employee::class);
     }
+    public function cashback_history()
+    {
+        return $this->hasOne(Cashback_history::class);
+    }
 }

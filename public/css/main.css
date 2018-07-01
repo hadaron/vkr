@@ -1,5 +1,4 @@
 html{
-    height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -24,6 +23,10 @@ a{
     outline: none;
     box-sizing: border-box;
 }
+input
+{
+    outline:none;
+}
 @font-face {
     font-family: 'LatoBlack';
     src: url('../Lato-Black.ttf') format('truetype');
@@ -35,7 +38,7 @@ header{
     padding: 0;
     height: 240px;
 }
-header figure{
+header figure img{
     width: 130px;
     height: 140px;
     padding-top: 45px;
@@ -44,7 +47,7 @@ header figure{
 main{
     height: 100%;
 }
-main section{
+.MainBlock{
     height: 400px;
     margin-bottom: 180px;
     display: flex;
@@ -68,7 +71,7 @@ footer{
     flex-direction: row;
 }
 footer article{
-    color: #333333;
+    color: #414143;
     font: 22px/22px Ubuntu;
 }
 footer article p{
@@ -78,7 +81,6 @@ footer article p{
     padding-top: 35px;
     padding-right: 5%;
 }
-
 .BlockCard{
     background: #fff url('../%-bg.png');
     background-repeat: repeat;
@@ -87,13 +89,18 @@ footer article p{
     box-shadow: 9px 9px 8px 0 rgba(0,0,0,0.14),0 8px 8px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
 
 }
-.BlockCard figure img{
+.ImgCard{
     width: 130px;
     height: 140px;
     margin-top: 30px;
 }
+.ImgRegister{
+    width: 93px;
+    height: 80px;
+    margin-top: 30px;
+}
 .BlockCard figure{
-    margin-left: 50px;
+    margin: 0 50px;
 }
 .BlockCard figure figcaption{
     color: #333333;
@@ -106,16 +113,9 @@ footer article p{
 }
 .Number{
     margin-top: 100px;
+    margin-bottom: 55px;
 }
 .FooterButton1{
-    background-color: #333333;
-    border-radius: 50px;
-    padding: 20px 50px;
-    color: #fff;
-    font: 22px/22px Ubuntu;
-    margin: 0 20px;
-}
-.FooterButton3{
     background-color: #333333;
     border-radius: 50px;
     padding: 20px 50px;
@@ -131,4 +131,228 @@ footer article p{
     color: #333333;
     font: 22px/22px Ubuntu;
     margin: 0 20px;
+}
+.BlockFooterButton{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.BlockFooterButton a{
+    color: #414143;
+    font: 22px/22px Ubuntu;
+    border-bottom: 1px solid #414143;
+    margin-bottom: 8px;
+}
+
+.ClassForm{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.ClassForm input{
+    width: 100%;
+    height: 45px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid #414143;
+}
+.BlockCardInput{
+    margin: 10px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.BlockCardInput input:nth-child(2n){
+    margin-left: 20px;
+
+}
+.BlockCardInput input:nth-child(1){
+    margin-right: 20px;
+}
+.BlockCardInputTel{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.BlockCardInputTel input[type=text]{
+    width: 100%;
+    height: 45px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid #414143;
+}
+.BlockCardInputPerson{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+
+}
+.BlockCardInputPerson2{
+    padding-top: 18px;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+
+}
+
+.BlockCardInputPerson2 label{
+
+    color: #414143;
+    font: 12px/12px Ubuntu;
+    padding-top: 15px;
+}
+.BlockCardInputPerson2 input[type=checkbox]{
+    width: 80px;
+    height: 15px;
+
+}
+.BlockCardInputPerson2Auth input[type=checkbox]{
+    width: 80px;
+    height: 15px;
+
+}
+.ButtonOrd{
+    margin: 12% auto;
+    background-color: #333333;
+    border-radius: 50px;
+    padding: 15px 50px;
+    color: #fff;
+    font: 22px/22px Ubuntu;
+    border:0;
+    max-width: 280px;
+}
+
+.BlockCardInputTelAuth{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 85px;
+}
+.BlockCardInputPerson2Auth {
+    padding-top: 18px;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+.BlockCardInputPerson2Auth label {
+    color: #414143;
+    font: 16px/16px Ubuntu;
+}
+@media screen and (max-width: 770px) /* Mobile */ {
+    header{
+        height: 100%;
+    }
+    header figure{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    header figure img{
+        padding: 0;
+        margin: 0;
+    }
+
+    .MainBlock {
+        height: 410px;
+        margin-bottom: 35%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .BlockCard{
+        width: 95%;
+    }
+    main section article{
+        width: 100%;
+    }
+    h2{
+        font: 35px/35px LatoBlack;
+    }
+
+    .FooterButton1 {
+        background-color: #333333;
+        border-radius: 50px;
+        padding: 10px 30px;
+        color: #fff;
+        font: 12px/12px Ubuntu;
+        margin: 0 20px;
+    }
+    .FooterButton2 {
+        border: 2px solid #333333;
+        border-radius: 50px;
+        padding: 10px 30px;
+        color: #333333;
+        font: 12px/12px Ubuntu;
+        margin: 0 20px;
+    }
+    footer{
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 20%;
+    }
+    footer article{
+        font: 16px/16px Ubuntu;
+    }
+    .ImgCard {
+        width: 80px;
+        height: 80px;
+        margin-top: 30px;
+    }
+    .BlockTitle{
+        padding: 5% 5%;
+    }
+    .CardZ{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .CardZ a{
+        margin: 10px 0;
+    }
+    .Number{
+        margin-top: 15%;
+        margin-bottom: 15%;
+
+    }
+    .BlockCard figure figcaption{
+        font: 18px/18px Ubuntu;
+    }
+    .BlockCardInputPerson2 label{
+        font: 9px/9px Ubuntu;
+    }
+    .ButtonOrd {
+        margin: 20% auto;
+        background-color: #333333;
+        border-radius: 50px;
+        padding: 20px 50px;
+        color: #fff;
+        font: 16px/16px Ubuntu;
+        border: 0;
+        max-width: 250px;
+    }
+    .BlockFooterButton a{
+        font: 16px/16px Ubuntu;
+    }
+    .BlockCardInputPerson2Auth label {
+        font: 12px/12px Ubuntu;
+    }
+}
+@media screen and (max-width: 400px) {
+
+    .BlockCardInputPerson2 label {
+        font: 8px/8px Ubuntu;
+    }
+    .BlockCardInputTelAuth{
+        margin-top: 70px;
+
+    }
 }

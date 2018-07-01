@@ -15,8 +15,8 @@ class CreateCashbackHistoriesTable extends Migration
     {
         Schema::create('cashback_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('shop_id');
-            $table->bigInteger('client_id');
+            $table->bigInteger('shop_id')->nullable();
+            $table->bigInteger('client_id')->nullable();
             $table->bigInteger('percent_id');
             $table->decimal('sum');
             $table->decimal('cashback');
@@ -24,8 +24,8 @@ class CreateCashbackHistoriesTable extends Migration
         });
 
         Schema::table('cashback_histories', function ($table) {
-            $table->foreign('client_id')->references('id')->on('clients');
-            $table->foreign('shop_id')->references('id')->on('shops');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('set null');
         });
     }
 

@@ -15,14 +15,14 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('partner_id');
+            $table->integer('partner_id')->nullable();
             $table->string('name');
             $table->string('address');
             $table->timestamps();
         });
 
         Schema::table('shops', function ($table) {
-            $table->foreign('partner_id')->references('id')->on('partners');
+            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('set null');
         });
 
     }

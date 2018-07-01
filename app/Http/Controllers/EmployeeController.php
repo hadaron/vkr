@@ -20,13 +20,7 @@ class EmployeeController extends Controller
             'employee_id' => "$query[id]",
             'log' => "$request[request]",
         ]);
-        return \DB::table('clients')
-            ->join('cards', 'clients.id', '=', 'cards.client_id')
-            ->join('users', 'clients.user_id', '=', 'users.id')
-            ->where('card_number', 'like', "%$request[request]%")
-            ->orWhere('phone', 'like', "%$request[request]%")
-            ->orWhere('last_name', 'like', "%$request[request]%")
-            ->get(array('phone', 'last_name', 'first_name', 'card_number', 'cashback', 'sum'));
+        return Client::with('user', 'cashback_history')->get();
     }
 
     public function transaction(Request $request)
@@ -36,7 +30,11 @@ class EmployeeController extends Controller
         $card = Client::all()->where('card_number', $request['card'])->first();
         $partner = Partner::all()->where("id", $shop['partner_id'])->first();
         $percent = Percent::all()->where("partner_id", $partner['id'])->last();
-        $cashback = $request['sum'] * $percent['percent'];
+        if ($request['sum'] <= 0) {
+            $cashback = 0;
+        } else {
+            $cashback = $request['sum'] * $percent['percent'];
+        }
         Cashback_history::create([
             'shop_id' => "$shop[id]",
             'client_id' => "$card[id]",
@@ -46,4 +44,5 @@ class EmployeeController extends Controller
         ]);
         return view('transaction_page');
     }
+
 }

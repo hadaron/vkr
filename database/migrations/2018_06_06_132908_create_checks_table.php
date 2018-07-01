@@ -15,14 +15,14 @@ class CreateChecksTable extends Migration
     {
         Schema::create('checks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('employee_id');;
+            $table->integer('employee_id')->nullable();
             $table->text('log');
             $table->timestamps();
         });
 
 
         Schema::table('checks', function (Blueprint $table) {
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('set null');
         });
     }
 

@@ -15,15 +15,15 @@ class CreatePercentsTable extends Migration
     {
         Schema::create('percents', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('partner_id');
+            $table->integer('partner_id')->nullable();
             $table->float('percent');
             $table->timestamps();
         });
         Schema::table('percents', function ($table) {
-            $table->foreign('partner_id')->references('id')->on('partners');
+            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('set null');
         });
         Schema::table('cashback_histories', function ($table) {
-            $table->foreign('percent_id')->references('id')->on('percents');
+            $table->foreign('percent_id')->references('id')->on('percents')->onDelete('set null');
         });
     }
 

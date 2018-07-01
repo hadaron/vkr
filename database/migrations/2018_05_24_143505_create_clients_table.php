@@ -18,11 +18,11 @@ class CreateClientsTable extends Migration
             $table->string('last_name');
             $table->string('first_name');
             $table->string('card_number');
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->nullable();
             $table->timestamps();
         });
         Schema::table('clients', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

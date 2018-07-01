@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\View;
+
 
 class Client extends Model
 {
@@ -12,6 +12,7 @@ class Client extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function cashback_history()
     {
         return $this->hasMany(Cashback_history::class);
