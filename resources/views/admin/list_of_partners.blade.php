@@ -3,21 +3,22 @@
 @section('content')
     <div class="form-group row">
         <div class="form-group">
-            <table class="form-control">
-                <thead class="thead-dark">
+            <table class="table table-hover">
+                <thead>
                 <tr>
-                    <td scope="col">Наименование</td>
-                    <td scope="col">Полное наименование</td>
-                    <td scope="col">ИНН</td>
-                    <td scope="col">КПП</td>
-                    <td scope="col">ОГРН</td>
-                    <td scope="col">Расчётный счёт</td>
-                    <td scope="col">Наименование банка</td>
-                    <td scope="col">БИК</td>
-                    <td scope="col">К/С</td>
-                    <td scope="col">Процент</td>
+                    <th>Наименование</th>
+                    <th>Полное наименование</th>
+                    <th>ИНН</th>
+                    <th>КПП</th>
+                    <th>ОГРН</th>
+                    <th>Расчётный счёт</th>
+                    <th>Наименование банка</th>
+                    <th>БИК</th>
+                    <th>К/С</th>
+                    <th>Процент</th>
+                    <th align="center">Отчет</th>
+                    <th>Удалить партнера</th>
                 </tr>
-                </thead>
                 @foreach($partners as $partner)
                     <tr>
                         <td>{{$partner->name}}</td>
@@ -50,14 +51,14 @@
                             <form action="{{route('report')}}" method="post">
                                 {{csrf_field()}}
                                 <input type="hidden" name="partner_id" value="{{$partner->id}}">
-                                <input type="submit" value="Отчёт">
+                                <button type="submit" class="btn btn-primary">{{ __('Отчёт') }}</button>
                             </form>
                         </td>
                         <td>
                             <form action="{{route('admin_registration_partner')}}" method="post">
                                 {{csrf_field()}}
                                 <input type="hidden" name="partner_id" value="{{$partner->id}}">
-                                <input type="submit" value="Удалить партнёра">
+                                <button type="submit" class="btn btn-primary">{{ __('Удалить партнёра') }}</button>
                             </form>
                         </td>
                     </tr>

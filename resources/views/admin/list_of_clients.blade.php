@@ -3,7 +3,8 @@
 @section('content')
     <div class="form-group row">
         <div class="form-group">
-            <table class="form-control">
+            <table class="table table-hover">
+                <thead>
                 <tr>
                     <td>Номер телефона</td>
                     <td>Email</td>
@@ -12,7 +13,9 @@
                     <td>Номер карты</td>
                     <td>Кэшбэк</td>
                     <td>Сумма покупок</td>
+                    <td>Удалить</td>
                 </tr>
+                </thead>
                 @foreach($clients as $client)
                     <tr>
                         <td>{{$client->user['phone']}}</td>
