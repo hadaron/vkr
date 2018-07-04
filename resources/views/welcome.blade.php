@@ -13,7 +13,7 @@
 <body>
 <header>
     <figure>
-        <img src="{{asset('svg/logo.svg')}}">
+        {{--<img src="{{asset('svg/logo.svg')}}">--}}
     </figure>
 </header>
 <main>
@@ -23,7 +23,7 @@
         </article>
         <article class="BlockCard">
             <figure>
-                <img class="ImgCard" src="{{asset('svg/logo-card.svg')}}">
+{{--                <img class="ImgCard" src="{{asset('svg/logo-card.svg')}}">--}}
                 <figcaption>Карта выгодных<br> покупок</figcaption>
                 <figcaption class="Number">9884 2372 7432 6985</figcaption>
             </figure>

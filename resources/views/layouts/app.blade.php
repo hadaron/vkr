@@ -14,9 +14,9 @@
 </head>
 <body>
 <header>
-    <figure>
-        <img src="{{ asset('svg/logo.svg') }}">
-    </figure>
+    {{--<figure>--}}
+        {{--<img src="{{ asset('svg/logo.svg') }}">--}}
+    {{--</figure>--}}
     @guest
         <a class="right" href="{{ route('login') }}">{{ __('Авторизация') }}</a>
         <a class="nav-link" href="{{ route('register') }}">{{ __('Регистрация') }}</a>

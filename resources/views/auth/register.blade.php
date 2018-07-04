@@ -8,16 +8,16 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <body>
-<header>
-    <figure>
-        <img src="{{asset('svg/logo.svg')}}">
-    </figure>
-</header>
+{{--<header>--}}
+    {{--<figure>--}}
+        {{--<img src="{{asset('svg/logo.svg')}}">--}}
+    {{--</figure>--}}
+{{--</header>--}}
 <main>
     <section class="MainBlock">
         <article class="BlockCard">
             <figure>
-                <img class="ImgRegister" src="{{asset('svg/logo-card.svg')}}">
+                {{--<img class="ImgRegister" src="{{asset('svg/logo-card.svg')}}">--}}
 
                 <form class="ClassForm" method="POST" action="{{ route('register') }}">
                     {{csrf_field()}}
