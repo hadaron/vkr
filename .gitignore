@@ -13,3 +13,7 @@ yarn-error.log
 .env
 _ide_helper.php
 /public/svg
+/public/%-bg.png
+/public/Background.png
+/public/bg.png
+/public/bg-2.png
