@@ -1,4 +1,4 @@
-в<?php
+<?php
 
 return [
 
